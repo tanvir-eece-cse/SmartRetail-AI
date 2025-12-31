@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment
+.env
+.env.local
+.env.production
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Build outputs
+frontend/dist/
+*.tar.gz
+
+# Models (large files)
+ml-service/models/*.joblib
+ml-service/models/*.pkl
+ml-service/models/*.h5
+ml-service/models/*.pt
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Docker volumes
+postgres_data/
+redis_data/
+grafana_data/
+prometheus_data/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Test artifacts
+.tox/
+.nox/
+
+# Secrets
+*.pem
+*.key
+secrets/

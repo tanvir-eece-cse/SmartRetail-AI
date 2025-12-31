@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: smartretail-config
+  namespace: smartretail
+data:
+  APP_ENV: "production"
+  APP_NAME: "SmartRetail-AI"
+  DATABASE_HOST: "postgres"
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: "smartretail"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  ML_SERVICE_URL: "http://ml-service:8001"
+  MLFLOW_TRACKING_URI: "http://mlflow:5000"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: smartretail-secrets
+  namespace: smartretail
+type: Opaque
+stringData:
+  DATABASE_PASSWORD: "your-secure-password"
+  SECRET_KEY: "your-super-secret-jwt-key-change-in-production"
+  REDIS_PASSWORD: "your-redis-password"
