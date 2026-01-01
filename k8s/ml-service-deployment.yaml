@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ml-service
-  namespace: smartretail
+  namespace: ai-ecommerce
   labels:
     app: ml-service
 spec:
@@ -26,20 +26,20 @@ spec:
     spec:
       containers:
         - name: ml-service
-          image: ghcr.io/tanvir-eece-cse/smartretail-ml-service:latest
+          image: ghcr.io/tanvir-eece-cse/ai-ecommerce-ml-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8001
           envFrom:
             - configMapRef:
-                name: smartretail-config
+                name: ai-ecommerce-config
           env:
             - name: DATABASE_URL
               value: "postgresql+asyncpg://postgres:$(DATABASE_PASSWORD)@postgres:5432/smartretail"
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: smartretail-secrets
+                  name: ai-ecommerce-secrets
                   key: DATABASE_PASSWORD
             - name: REDIS_URL
               value: "redis://redis:6379/0"
@@ -97,7 +97,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ml-service
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   selector:
     app: ml-service
@@ -110,7 +110,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ml-models-pvc
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   accessModes:
     - ReadWriteMany
@@ -123,7 +123,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ml-service-hpa
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

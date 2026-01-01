@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: smartretail
+  namespace: ai-ecommerce
   labels:
     app: backend
 spec:
@@ -26,25 +26,25 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/tanvir-eece-cse/smartretail-backend:latest
+          image: ghcr.io/tanvir-eece-cse/ai-ecommerce-backend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
           envFrom:
             - configMapRef:
-                name: smartretail-config
+                name: ai-ecommerce-config
           env:
             - name: DATABASE_URL
               value: "postgresql+asyncpg://postgres:$(DATABASE_PASSWORD)@postgres:5432/smartretail"
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: smartretail-secrets
+                  name: ai-ecommerce-secrets
                   key: DATABASE_PASSWORD
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: smartretail-secrets
+                  name: ai-ecommerce-secrets
                   key: SECRET_KEY
             - name: REDIS_URL
               value: "redis://redis:6379/0"
@@ -93,7 +93,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   selector:
     app: backend
@@ -106,7 +106,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: backend-hpa
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

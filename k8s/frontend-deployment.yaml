@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: smartretail
+  namespace: ai-ecommerce
   labels:
     app: frontend
 spec:
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/tanvir-eece-cse/smartretail-frontend:latest
+          image: ghcr.io/tanvir-eece-cse/ai-ecommerce-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -69,7 +69,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   selector:
     app: frontend

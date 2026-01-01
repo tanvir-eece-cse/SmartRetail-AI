@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   serviceName: postgres
   replicas: 1
@@ -70,7 +70,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   selector:
     app: postgres
@@ -83,7 +83,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   replicas: 1
   selector:
@@ -122,7 +122,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis
-  namespace: smartretail
+  namespace: ai-ecommerce
 spec:
   selector:
     app: redis
